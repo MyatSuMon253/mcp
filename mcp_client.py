@@ -61,14 +61,14 @@ class MCPClient:
         return []
  
     async def read_resource(self, uri: str) -> Any:
-        result = await self.sesssion().read_resource(AnyUrl(uri))
+        result = await self.session().read_resource(AnyUrl(uri))
         resource = result.contents[0]
-
-        if isinstance(resource, types.TextResourceContents): 
-            if resource.mimeType = "application/json":
+    
+        if isinstance(resource, types.TextResourceContents):
+            if resource.mimeType == "application/json":
                 return json.loads(resource.text)
-            
-            return resource.text
+    
+        return resource.text
 
     async def cleanup(self):
         await self._exit_stack.aclose()
